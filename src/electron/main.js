@@ -30,7 +30,7 @@ const createWindow = () => {
     width: 600,
     height: 600,
     webPreferences: {
-      webSecurity: false,
+      webSecurity: true,
       nodeIntegration: true,
       enableRemoteModule: true,
       contextIsolation: true,
@@ -48,7 +48,7 @@ const createWindow = () => {
     width: 600,
     height: 600,
     webPreferences: {
-      webSecurity: false,
+      webSecurity: true,
       nodeIntegration: true,
       enableRemoteModule: true,
       contextIsolation: true,
