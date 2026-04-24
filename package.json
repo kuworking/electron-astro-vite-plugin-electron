@@ -1,15 +1,20 @@
 {
   "name": "electron-astro-vite-plugin-electron",
   "type": "module",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "dist-electron/main.js",
   "scripts": {
     "test": "electron .",
     "dist": "electron-builder",
     "dev": "astro dev && electron .",
-    "build": "astro build && electron-builder",
+    "build:astro": "astro build",
+    "build:electron": "electron-builder",
+    "build": "npm run build:astro && npm run build:electron",
+    "build2": "astro build && electron-builder",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "update": "npx npm-check-updates -u",
+    "clean": " rm -rf dist dist-electron .vite node_modules/.vite"
   },
   "build": {
     "appId": "this.app",
@@ -26,22 +31,34 @@
     },
     "dmg": {
       "title": "${productName} ${version}"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
     }
   },
   "dependencies": {
-    "@astrojs/react": "3.6.0",
-    "fs-extra": "11.2.0"
+    "@astrojs/react": "5.0.4",
+    "@astrojs/solid-js": "6.0.1",
+    "@nanostores/react": "1.1.0",
+    "@nanostores/solid": "1.1.1",
+    "nanostores": "1.3.0",
+    "isomorphic-unfetch": "4.0.2",
+    "solid-js": "1.9.12",
+    "fs-extra": "11.3.4",
+    "path": "0.12.7"
   },
   "devDependencies": {
-    "astro": "4.11.3",
-    "electron": "31.1.0",
-    "electron-builder": "24.13.3",
-    "eslint": "9.6.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-astro": "1.2.2",
-    "eslint-plugin-prettier": "5.1.3",
-    "prettier": "3.3.2",
-    "prettier-plugin-astro": "0.14.0",
-    "vite-plugin-electron": "0.28.7"
+    "astro": "6.1.9",
+    "electron": "41.3.0",
+    "electron-builder": "26.8.1",
+    "eslint": "10.2.1",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-astro": "1.7.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-prettier": "5.5.5",
+    "prettier": "3.8.3",
+    "prettier-plugin-astro": "0.14.1",
+    "vite-plugin-electron": "0.29.1"
   }
 }

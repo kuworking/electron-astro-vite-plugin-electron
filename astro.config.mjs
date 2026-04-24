@@ -1,12 +1,21 @@
 import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
+import solid from '@astrojs/solid-js'
 import vitePluginElectron from 'vite-plugin-electron/simple'
 import path from 'path'
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    react(),
+    react({
+      include: ['**/react/**/*'],
+    }),
+    solid(
+      {
+        include: ['**/solid/**/*'],
+      },
+      { devtools: false } // doesn't work with electron
+    ),
     {
       // cloned from astro-electron integration 0.3.1
       name: 'electron-astro-vite-plugin-electron',
@@ -25,7 +34,15 @@ export default defineConfig({
                 vitePluginElectron({
                   main: {
                     entry: 'src/electron/main.js',
-                    vite: config.vite,
+                    vite: {
+                      ...config.vite,
+                      server: {
+                        watch: {
+                          usePolling: true, // Assegura la detecció de fitxers canviants
+                          interval: 300, // Temps d'espera més alt entre comprovacions
+                        },
+                      },
+                    },
                   },
                   preload: {
                     input: 'src/electron/preload.js',
